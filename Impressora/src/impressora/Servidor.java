@@ -29,13 +29,11 @@ public class Servidor implements Runnable{
         clientes = new ArrayList<MsgCliente>();
         ativado = false;
         executando = false;
+        serverSocket = new ServerSocket(porta);
+        ativado = true;
         
-        open();
      }
-     private void open() throws IOException{
-         serverSocket = new ServerSocket(porta);
-         ativado = true;
-     }
+     
      private void close()throws IOException{
          
          for(MsgCliente cliente : clientes){
@@ -76,7 +74,7 @@ public class Servidor implements Runnable{
     @Override
     public void run() {
         
-        System.out.println("Aguardando conexão");
+        System.out.println("Esperando conexão");
         
        while(executando) {
            try{

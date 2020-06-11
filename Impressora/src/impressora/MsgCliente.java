@@ -20,7 +20,6 @@ import java.net.SocketTimeoutException;
 public class MsgCliente implements Runnable{
     
     private Socket socket;
-    private BufferedReader in;
     private InputStream imprime;
     private PrintStream out;
     
@@ -39,7 +38,7 @@ public class MsgCliente implements Runnable{
     
     private void open()throws IOException {
         try{
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+     
             imprime = socket.getInputStream();
             out = new PrintStream(socket.getOutputStream());
             ativado = true;
@@ -49,9 +48,9 @@ public class MsgCliente implements Runnable{
         }
     }
     private void close(){
-        if(in != null){
+        if(imprime != null){
             try{
-            in.close();
+            imprime.close();
             }catch(Exception e){
                 System.out.print(e);
             }
@@ -71,7 +70,7 @@ public class MsgCliente implements Runnable{
                 System.out.print(e);
         }
         
-        in = null;
+        imprime = null;
         out = null;
         socket = null;
         
@@ -98,15 +97,7 @@ public class MsgCliente implements Runnable{
     public void run(){
         while(executando){
             try{
-                
-                //socket.setSoTimeout(2500);
-                /*String msg = in.readLine();
-                System.out.println("Mensagem recebida: " + msg );
-                if("saida".equals(msg)){
-                    break;
-                }
-                out.println(msg);
-                */
+                              
                 System.out.println("Mensagem recebida: " + imprime.read() );
                 Thread.sleep(100);
             }catch(SocketTimeoutException e){

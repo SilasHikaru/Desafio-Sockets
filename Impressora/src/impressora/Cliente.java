@@ -23,19 +23,18 @@ public class Cliente {
     
     public static void main(String[] args) throws IOException {
   
-  System.out.println("Inciando Cliente.");
+  System.out.println("Inciando com o cliente.");
   
-  System.out.println("Inciando Conexão com Servidor.");
+  System.out.println("Inciando no servidor.");
   
   Socket socket = new Socket("localhost",2525);
  
-  System.out.println("Conexão estabelecida.");
+  System.out.println("Conexão executada.");
   
   InputStream entrada = socket.getInputStream();
   
   OutputStream output = socket.getOutputStream();
   
- // BufferedReader in = new BufferedReader(new InputStreamReader(entrada));
   
   PrintStream out = new PrintStream(output);
   
@@ -44,7 +43,7 @@ public class Cliente {
   
   while (true) {
       
-    if(entrada.available() != 0){
+    if(entrada.available() != 0){ // Problemas no available
         
         byte[] mensagem = new byte[entrada.available()];
         entrada.read(mensagem);
@@ -57,12 +56,6 @@ public class Cliente {
          }
     }
 
-    /*mensagem = in.readLine();
-
-    System.out.println(
-      "Mensagem recebida do servidor: " +
-      mensagem);
-      */
    }
 
    System.out.println("Encerrando conexão.");
